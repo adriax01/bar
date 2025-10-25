@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Informazioni - Bar</title>
+  <style>
+    :root {
+      --sidebar-w: 300px; /* Larghezza del menu */
+      --header-h: 100px; /* Altezza dell'header */
+      --footer-h: 120px;
+      --border: 1px solid #333;
+      --bg: #fff;
+      --primary-color: #FF6F61; /* Corallo caldo */
+      --secondary-color: #F4A300; /* Arancione dorato */
+      --accent-color: #2C3E50; /* Blu scuro */
+      --light-bg: #F7F7F7; /* Grigio chiaro */
+      --menu-bg: #F4F4F4; /* Colore di sfondo per il menu */
+      --menu-hover: #FF6F61; /* Colore di hover per il menu */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; background: var(--light-bg); }
+
+    /* Layout esterno */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) minmax(520px, 1fr) auto;
+      height: 100vh;
+      background: var(--bg);
+    }
+
+    /* Colonna sinistra (Menu) */
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-right: var(--border);
+      padding: 20px;
+      background: var(--menu-bg);
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      height: 100%; /* Esteso per coprire tutta l'altezza della pagina */
+    }
+
+    .left a {
+      text-decoration: none;
+      color: var(--accent-color);
+      padding: 15px;
+      margin: 8px 0;
+      background: #fff;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      transition: background 0.3s, color 0.3s;
+      font-size: 16px;
+    }
+
+    .left a:hover {
+      background: var(--menu-hover);
+      color: white;
+    }
+
+    .left a.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* Colonna centrale (Header / Contenuti) */
+    .center {
+      display: grid;
+      grid-template-rows: var(--header-h) 1fr var(--footer-h);
+      min-width: 0;
+    }
+
+    /* Header - Esteso su tutta la pagina con sfondo rosa */
+    header.panel {
+      border-bottom: var(--border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 40px;
+      background-color: var(--primary-color);
+      color: #fff;
+      height: var(--header-h);
+      width: 100%;
+    }
+
+    /* Logo Header */
+    header .logo {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    /* Sezione informazioni */
+    .content {
+      border-left: var(--border);
+      border-right: var(--border);
+      overflow: hidden;
+      background: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .content h1 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 1.2rem;
+      color: var(--accent-color);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .content .info-images {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .content .info-images img {
+      width: 400px; /* Aumentato da 300px a 400px */
+      height: 250px; /* Aumentato da 200px a 250px */
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Footer */
+    footer.panel {
+      border-top: var(--border);
+      padding: 20px 0; /* Riduce l'altezza del footer */
+      text-align: center; /* Centra tutto il contenuto del footer */
+      background-color: var(--menu-bg);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .social-links {
+      margin-bottom: 10px; /* Aggiunge un po' di spazio tra le icone e il testo */
+    }
+
+    .social-links a {
+      margin: 0 8px; /* Distanza tra le icone */
+    }
+
+    .footer-text {
+      font-size: 14px; /* Diminuisce la dimensione del testo */
+    }
+
+    .footer-text a {
+      font-size: 14px; /* Diminuisce la dimensione del testo del link */
+      margin-top: 5px;
+      display: inline-block;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+    <!-- Colonna sinistra (Menu) -->
+    <aside class="left">
+      <div class="logo">BAR</div>
+      <a href="index.html">Home</a>
+      <a href="Panini.html">Panini</a>
+      <a href="Bibite.html">Bibite</a>
+      <a href="Contatti.html">Contatti</a>
+      <a href="Informazioni.html" class="active">Informazioni</a>
+    </aside>
+
+    <!-- Colonna centrale -->
+    <main class="center">
+      <header class="panel">
+        <div class="logo">Informazioni</div>
+      </header>
+
+      <section class="content">
+        <h1>La Storia del Nostro Bar</h1>
+        <p>Il nostro bar è nato con un sogno semplice: creare un luogo dove le persone potessero sentirsi a casa, lontano dal trambusto della vita quotidiana. Fondato nel cuore della città, il bar ha iniziato come una piccola caffetteria, ma col tempo è diventato un vero e proprio punto di riferimento per chi cerca un ambiente accogliente e vivace.
+
+Sin dal primo giorno, abbiamo messo il cuore in ogni tazza di caffè, in ogni panino e in ogni cocktail preparato. La nostra missione è sempre stata quella di servire i clienti con il miglior servizio possibile, offrendo prodotti freschi e di qualità, che spaziano dai panini gourmet alle bevande creative.
+
+Nel corso degli anni, il nostro bar è diventato un angolo dove la comunità si incontra per condividere risate, storie e momenti speciali. Ogni angolo del nostro bar racconta una storia di amicizia, passione e convivialità.
+
+Abbiamo voluto creare un'atmosfera unica, dove ogni cliente, che sia un abituale o un nuovo visitatore, si senta accolto. Dai concerti dal vivo agli eventi tematici, siamo sempre alla ricerca di modi per portare qualcosa di speciale nella vita dei nostri clienti.
+
+Il nostro bar non è solo un luogo dove mangiare e bere, ma uno spazio dove nascono ricordi, si fanno nuove amicizie e ci si rilassa dopo una lunga giornata. Siamo orgogliosi di essere parte della comunità e di continuare a servire con passione e impegno, giorno dopo giorno.</p>
+        
+        <div class="info-images">
+          <img src="https://c8.alamy.com/compit/d9r6ey/ingresso-di-un-bar-trastevere-roma-della-provincia-di-roma-italia-d9r6ey.jpg" alt="Foto del bar 1">
+          <img src="https://www.coqtailmilano.com/wp-content/uploads/2022/08/Dr.-Stravinsky-Barcellona-cocktail-bar-Coqtail-Milano-1-1024x576.jpg" alt="Foto del bar 2">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmTUXEYTyNAxm01I4rMVZf-_pjGnLasPDU3ZSiXAgq1XMy1p9x6lrGGyi2Ld88lLmKMB4&usqp=CAU" alt="Foto del bar 3">
+        </div>
+        
+        <p>Nel corso degli anni, il nostro bar è diventato un punto di riferimento per la comunità, dove le persone possono incontrarsi, divertirsi e rilassarsi con amici e familiari.</p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="panel">
+    <div class="footer-content">
+      <div class="social-links">
+        <a href="https://www.facebook.com" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1024px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" style="width: 25px; margin-right: 10px;">
+        </a>
+        <a href="https://www.instagram.com" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1024px-Instagram_logo_2022.svg.png" alt="Instagram" style="width: 25px;">
+        </a>
+      </div>
+      <div class="footer-text">
+        <p>&copy; 2025 Bar Nome - Tutti i diritti riservati</p>
+        <a href="privacy.html" style="color: var(--accent-color); text-decoration: none;">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bar</title>
+  <style>
+    :root {
+      --sidebar-w: 300px; /* Larghezza del menu */
+      --header-h: 100px; /* Altezza dell'header */
+      --footer-h: 120px;
+      --border: 1px solid #333;
+      --bg: #fff;
+      --primary-color: #FF6F61; /* Corallo caldo */
+      --secondary-color: #F4A300; /* Arancione dorato */
+      --accent-color: #2C3E50; /* Blu scuro */
+      --light-bg: #F7F7F7; /* Grigio chiaro */
+      --menu-bg: #F4F4F4; /* Colore di sfondo per il menu */
+      --menu-hover: #FF6F61; /* Colore di hover per il menu */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; background: var(--light-bg); }
+
+    /* Layout esterno */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) minmax(520px, 1fr) auto;
+      height: 100vh;
+      background: var(--bg);
+    }
+
+    /* Colonna sinistra (Menu) */
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-right: var(--border);
+      padding: 20px;
+      background: var(--menu-bg);
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      height: 100%; /* Esteso per coprire tutta l'altezza della pagina */
+    }
+
+    .left a {
+      text-decoration: none;
+      color: var(--accent-color);
+      padding: 15px;
+      margin: 8px 0;
+      background: #fff;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      transition: background 0.3s, color 0.3s;
+      font-size: 16px;
+    }
+
+    .left a:hover {
+      background: var(--menu-hover);
+      color: white;
+    }
+
+    .left a.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* Colonna centrale (Header / Contenuti) */
+    .center {
+      display: grid;
+      grid-template-rows: var(--header-h) 1fr var(--footer-h);
+      min-width: 0;
+    }
+
+    /* Header - Esteso su tutta la pagina con sfondo rosa */
+    header.panel {
+      border-bottom: var(--border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 40px;
+      background-color: var(--primary-color);
+      color: #fff;
+      height: var(--header-h);
+      width: 100%; /* Assicura che l'header si estenda su tutta la larghezza */
+    }
+
+    /* Logo Header */
+    header .logo {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    /* Sezione contenuto */
+    .content {
+      border-left: var(--border);
+      border-right: var(--border);
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      height: 100%;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer.panel {
+      border-top: var(--border);
+      padding: 10px 0; /* Riduce l'altezza del footer */
+      text-align: center; /* Centra tutto il contenuto del footer */
+      background-color: var(--menu-bg); /* Puoi cambiarlo in base alla tua palette */
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .social-links {
+      margin-bottom: 10px; /* Aggiunge un po' di spazio tra le icone e il testo */
+    }
+
+    .social-links a {
+      margin: 0 8px; /* Distanza tra le icone */
+    }
+
+    .footer-text {
+      font-size: 14px; /* Diminuisce la dimensione del testo */
+    }
+
+    .footer-text a {
+      font-size: 14px; /* Diminuisce la dimensione del testo del link */
+      margin-top: 5px;
+      display: inline-block;
+    }
+
+    /* Responsive: nascondi laterali sotto 900px */
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .left { display: none; }
+      .center .content { border-left: 0; border-right: 0; }
+    }
+
+    /* Modifica header per la versione più compatta */
+    @media (max-width: 768px) {
+      header.panel {
+        height: 120px; /* Header più compatto */
+        padding: 0 20px;
+      }
+
+      .left {
+        height: auto; /* Rende il menu più corto */
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+    <!-- Colonna sinistra (Menu) -->
+    <aside class="left">
+      <div class="logo">BAR</div>
+      <a href="index.html" class="active">Home</a>
+      <a href="Panini.html">Panini</a>
+      <a href="Bibite.html">Bibite</a>
+      <a href="Contatti.html">Contatti</a>
+      <a href="Informazioni.html">Informazioni</a>
+    </aside>
+
+    <!-- Colonna centrale -->
+    <main class="center">
+      <header class="panel">
+        <div class="logo">Bar</div>
+      </header>
+      <section class="content">
+        <h1>Benvenuto nel nostro Bar!</h1>
+        <p>Vieni a trovarci e scopri il nostro angolo di felicità! Offriamo panini gourmet, cocktail unici e un'atmosfera accogliente. Ogni momento al nostro bar è speciale. Unisciti a noi per una pausa rilassante nel cuore della città.</p>
+  <img src="immagini/aa925624-9fbf-44a9-8cc8-051ef8bed879.png" alt="Descrizione dell'immagine" style="max-width: 400px; height: auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <a href="Panini.html" style="text-decoration: none; background-color: var(--primary-color); color: white; padding: 15px 30px; border-radius: 5px; font-size: 16px; display: inline-block; margin-top: 20px;">Scopri il nostro Menu</a>
+      </section>
+    </main>
+  </div>
+  <footer class="panel">
+    <div class="footer-content">
+      <div class="social-links">
+        <a href="https://www.facebook.com" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1024px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" style="width: 25px; margin-right: 10px;">
+        </a>
+        <a href="https://www.instagram.com" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1024px-Instagram_logo_2022.svg.png" alt="Instagram" style="width: 25px;">
+        </a>
+      </div>
+      <div class="footer-text">
+        <p>&copy; 2025 Bar Nome - Tutti i diritti riservati</p>
+        <a href="privacy.html" style="color: var(--accent-color); text-decoration: none;">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

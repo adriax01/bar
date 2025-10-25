@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contatti - Bar</title>
+  <style>
+    :root{
+      --sidebar-w: 300px; /* Larghezza del menu */
+      --header-h: 100px; /* Altezza dell'header */
+      --footer-h: 120px;
+      --border: 1px solid #333;
+      --bg: #fff;
+      --primary-color: #FF6F61; /* Corallo caldo */
+      --secondary-color: #F4A300; /* Arancione dorato */
+      --accent-color: #2C3E50; /* Blu scuro */
+      --light-bg: #F7F7F7; /* Grigio chiaro */
+      --menu-bg: #F4F4F4; /* Colore di sfondo per il menu */
+      --menu-hover: #FF6F61; /* Colore di hover per il menu */
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0, 0, 0, 0.1); /* Ombra della card */
+      --card-border-radius: 10px;
+      --img-height: 200px; /* Altezza uniforme per tutte le immagini */
+      --img-width: 200px; /* Larghezza uniforme per tutte le immagini */
+      --cart-width: 350px; /* Larghezza maggiore per il carrello */
+      --cart-height: 500px; /* Altezza maggiore per il carrello */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; background: var(--light-bg); }
+
+    /* Layout esterno */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) minmax(520px, 1fr) auto;
+      height: 100vh;
+      background: var(--bg);
+    }
+
+    /* Colonna sinistra (Menu) */
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-right: var(--border);
+      padding: 20px;
+      background: var(--menu-bg);
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      height: 100%; /* Esteso per coprire tutta l'altezza della pagina */
+    }
+
+    .left a {
+      text-decoration: none;
+      color: var(--accent-color);
+      padding: 15px;
+      margin: 8px 0;
+      background: #fff;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      transition: background 0.3s, color 0.3s;
+      font-size: 16px;
+    }
+
+    .left a:hover {
+      background: var(--menu-hover);
+      color: white;
+    }
+
+    .left a.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* Colonna centrale (Header / Contenuti) */
+    .center {
+      display: grid;
+      grid-template-rows: var(--header-h) 1fr var(--footer-h);
+      min-width: 0;
+    }
+
+    /* Header - Esteso su tutta la pagina con sfondo rosa */
+    header.panel {
+      border-bottom: var(--border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 40px;
+      background-color: var(--primary-color);
+      color: #fff;
+      height: var(--header-h);
+      width: 100%; /* Assicura che l'header si estenda su tutta la larghezza */
+    }
+
+    /* Logo Header */
+    header .logo {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    /* Sezione Contatti */
+    .contact-form {
+      display: grid;
+      gap: 20px;
+      padding: 20px;
+      background-color: var(--light-bg);
+    }
+
+    .contact-form h2 {
+      font-size: 24px;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+
+    .contact-form button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .contact-form button:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* Footer */
+   footer.panel {
+  border-top: var(--border);
+  padding: 10px 0; /* Riduce l'altezza del footer */
+  text-align: center; /* Centra tutto il contenuto del footer */
+  background-color: var(--menu-bg); /* Puoi cambiarlo in base alla tua palette */
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-links {
+  margin-bottom: 10px; /* Aggiunge un po' di spazio tra le icone e il testo */
+}
+
+.social-links a {
+  margin: 0 8px; /* Distanza tra le icone */
+}
+
+.footer-text {
+  font-size: 14px; /* Diminuisce la dimensione del testo */
+}
+
+.footer-text a {
+  font-size: 14px; /* Diminuisce la dimensione del testo del link */
+  margin-top: 5px;
+  display: inline-block;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+    <!-- Colonna sinistra (Menu) -->
+    <aside class="left">
+      <div class="logo">BAR</div>
+      <a href="index.html" class="active">Home</a>
+      <a href="Panini.html">Panini</a>
+      <a href="Bibite.html">Bibite</a>
+      <a href="Contatti.html" class="active">Contatti</a> <!-- Link alla pagina Contatti -->
+     <a href="Informazioni.html" class="active">Informazioni</a>    
+    </aside>
+
+    <!-- Colonna centrale -->
+    <main class="center">
+      <header class="panel">
+        <div class="logo">Contatti</div>
+      </header>
+      <section class="contact-form">
+        <h2>Contattaci</h2>
+        <form id="contactForm">
+          <label for="name">Nome:</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="message">Messaggio:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+
+          <button type="submit">Invia Messaggio</button>
+        </form>
+      </section>
+     <footer class="panel">
+  <div class="footer-content">
+    <div class="social-links">
+      <a href="https://www.facebook.com" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1024px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" style="width: 25px; margin-right: 10px;">
+      </a>
+      <a href="https://www.instagram.com" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1024px-Instagram_logo_2022.svg.png" alt="Instagram" style="width: 25px;">
+      </a>
+    </div>
+    <div class="footer-text">
+      <p>&copy; 2025 Bar Nome - Tutti i diritti riservati</p>
+      <a href="privacy.html" style="color: var(--accent-color); text-decoration: none;">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+
+  <script>
+    // Funzione per gestire l'invio del modulo
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Impedisce l'invio effettivo del modulo
+
+      // Mostra il messaggio di conferma
+      alert('Messaggio inviato!');
+
+      // Azzera il modulo
+      document.getElementById('contactForm').reset();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panini - Bar</title>
+  <style>
+    :root{
+      --sidebar-w: 300px; /* Larghezza del menu */
+      --header-h: 100px; /* Altezza dell'header */
+      --footer-h: 120px;
+      --border: 1px solid #333;
+      --bg: #fff;
+      --primary-color: #FF6F61; /* Corallo caldo */
+      --secondary-color: #F4A300; /* Arancione dorato */
+      --accent-color: #2C3E50; /* Blu scuro */
+      --light-bg: #F7F7F7; /* Grigio chiaro */
+      --menu-bg: #F4F4F4; /* Colore di sfondo per il menu */
+      --menu-hover: #FF6F61; /* Colore di hover per il menu */
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0, 0, 0, 0.1); /* Ombra della card */
+      --card-border-radius: 10px;
+      --img-height: 200px; /* Altezza uniforme per tutte le immagini */
+      --img-width: 200px; /* Larghezza uniforme per tutte le immagini */
+      --cart-width: 350px; /* Larghezza maggiore per il carrello */
+      --cart-height: 500px; /* Altezza maggiore per il carrello */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; background: var(--light-bg); }
+
+    /* Layout esterno */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) minmax(520px, 1fr) auto;
+      height: 100vh;
+      background: var(--bg);
+    }
+
+    /* Colonna sinistra (Menu) */
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-right: var(--border);
+      padding: 20px;
+      background: var(--menu-bg);
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      height: 100%; /* Esteso per coprire tutta l'altezza della pagina */
+    }
+
+    .left a {
+      text-decoration: none;
+      color: var(--accent-color);
+      padding: 15px;
+      margin: 8px 0;
+      background: #fff;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      transition: background 0.3s, color 0.3s;
+      font-size: 16px;
+    }
+
+    .left a:hover {
+      background: var(--menu-hover);
+      color: white;
+    }
+
+    .left a.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* Colonna centrale (Header / Contenuti) */
+    .center {
+      display: grid;
+      grid-template-rows: var(--header-h) 1fr var(--footer-h);
+      min-width: 0;
+    }
+
+    /* Header - Esteso su tutta la pagina con sfondo rosa */
+    header.panel {
+      border-bottom: var(--border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 40px;
+      background-color: var(--primary-color);
+      color: #fff;
+      height: var(--header-h);
+      width: 100%; /* Assicura che l'header si estenda su tutta la larghezza */
+    }
+
+    /* Logo Header */
+    header .logo {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    /* Contenuto centrale (Card Panini) */
+    .content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 panini per riga */
+      gap: 20px;
+      padding: 20px;
+      background-color: var(--light-bg);
+    }
+
+    .panino {
+      background: var(--card-bg);
+      border-radius: var(--card-border-radius);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .panino:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Uniforma la grandezza delle immagini */
+    .panino img {
+      width: var(--img-width);
+      height: var(--img-height);
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .panino h3 {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    .panino p {
+      font-size: 14px;
+      margin: 10px 0;
+    }
+
+    .panino button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .panino button:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* Footer */
+  footer.panel {
+  border-top: var(--border);
+  padding: 10px 0; /* Riduce l'altezza del footer */
+  text-align: center; /* Centra tutto il contenuto del footer */
+  background-color: var(--menu-bg); /* Puoi cambiarlo in base alla tua palette */
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-links {
+  margin-bottom: 10px; /* Aggiunge un po' di spazio tra le icone e il testo */
+}
+
+.social-links a {
+  margin: 0 8px; /* Distanza tra le icone */
+}
+
+.footer-text {
+  font-size: 14px; /* Diminuisce la dimensione del testo */
+}
+
+.footer-text a {
+  font-size: 14px; /* Diminuisce la dimensione del testo del link */
+  margin-top: 5px;
+  display: inline-block;
+}
+
+    /* Carrello */
+    .cart {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+      border: 2px solid var(--primary-color);
+      width: var(--cart-width); /* Larghezza maggiore per il carrello */
+      height: var(--cart-height); /* Altezza maggiore per il carrello */
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+      transform: translateX(100%);
+    }
+
+    .cart.open {
+      transform: translateX(0);
+    }
+
+    .cart .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .cart .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .cart .cart-item span {
+      font-weight: bold;
+    }
+
+    .cart .total {
+      margin-top: 20px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .cart button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .cart button:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* Pulsante per mostrare il carrello */
+    .show-cart {
+      position: fixed;
+      right: 20px;
+      bottom: 100px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px;
+      border-radius: 50%;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .show-cart:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* Responsive: nascondi laterali sotto 900px */
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .left { display: none; }
+      .center .content { border-left: 0; border-right: 0; }
+    }
+
+    /* Modifica header per la versione più compatta */
+    @media (max-width: 768px) {
+      header.panel {
+        height: 120px; /* Header più compatto */
+        padding: 0 20px;
+      }
+
+      .left {
+        height: auto; /* Rende il menu più corto */
+        padding: 10px;
+      }
+
+      .content {
+        grid-template-columns: repeat(2, 1fr); /* 2 panini per riga su dispositivi piccoli */
+      }
+
+      .cart {
+        width: 80%; /* Ridotto per schermi piccoli */
+        height: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+    <!-- Colonna sinistra (Menu) -->
+    <aside class="left">
+      <div class="logo">BAR</div>
+      <a href="index.html" class="active">Home</a>
+      <a href="Panini.html" class="active">Panini</a> <!-- Link alla pagina Panini.html -->
+      <a href="Bibite.html">Bibite</a> <!-- Link alla pagina Bibite.html -->
+      <a href="Contatti.html">Contatti</a> <!-- Link alla pagina Contatti -->
+      <a href="Informazioni.html" class="active">Informazioni</a>
+    </aside>
+
+    <!-- Colonna centrale -->
+    <main class="center">
+      <header class="panel">
+        <div class="logo">Panini</div>
+      </header>
+      <section class="content">
+        <!-- Esempio di Panino -->
+        <div class="panino">
+          <img src="https://sfiziedeliziepalermo.com/wp-content/uploads/2020/06/prosciutto.jpeg" alt="Panino Prosciutto">
+          <h3>Panino Prosciutto</h3>
+          <p>Panino con prosciutto cotto.</p>
+          <button onclick="addToCart('Panino Prosciutto', 1.80)">Aggiungi al carrello - 1.80€</button>
+        </div>
+
+        <div class="panino">
+          <img src="https://www.ciarancino.it/wp-content/uploads/2023/11/Panino-Wurstel-Patatine-600x600.webp" alt="Panino Patatine e Wurstel">
+          <h3>Panino Patatine e Wurstel</h3>
+          <p>Panino con wurstel e patatine fritte.</p>
+          <button onclick="addToCart('Panino Patatine e Wurstel', 2)">Aggiungi al carrello - 2€</button>
+        </div>
+
+        <div class="panino">
+          <img src="https://sfiziedeliziepalermo.com/wp-content/uploads/2020/06/crudo.jpeg" alt="Panino Crudo">
+          <h3>Panino Crudo</h3>
+          <p>Panino con prosciutto crudo.</p>
+          <button onclick="addToCart('Panino Crudo', 2.20)">Aggiungi al carrello - 2.20€</button>
+        </div>
+
+        <div class="panino">
+          <img src="https://sfiziedeliziepalermo.com/wp-content/uploads/2020/06/fesa-tacchino-1-1064x798.jpeg" alt="Panino Fesa">
+          <h3>Panino Fesa</h3>
+          <p>Panino con fesa di tacchino.</p>
+          <button onclick="addToCart('Panino Fesa', 1.80)">Aggiungi al carrello - 1.80€</button>
+        </div>
+
+        <!-- Altri Panini -->
+        <div class="panino">
+          <img src="https://as2.ftcdn.net/jpg/00/32/23/55/1000_F_32235520_Vp2TTzP6R31rW5ZKSsTVyiVmQCTuQu7m.jpg" alt="Panino Mozzarella">
+          <h3>Panino Mozzarella</h3>
+          <p>Panino con mozzarella, pomodoro e lattuga.</p>
+          <button onclick="addToCart('Panino Mozzarella', 2)">Aggiungi al carrello - 2€</button>
+        </div>
+
+        <div class="panino">
+          <img src="https://sfiziedeliziepalermo.com/wp-content/uploads/2023/10/Patatine-1064x798.jpeg" alt="Panino con patatine">
+          <h3>Panino Patatine</h3>
+          <p>Panino con patatine.</p>
+          <button onclick="addToCart('Panino Patatine', 1.80)">Aggiungi al carrello - 1.80€</button>
+        </div>
+
+        <div class="panino">
+          <img src="https://sfiziedeliziepalermo.com/wp-content/uploads/2020/06/Speck.jpeg" alt="Panino Speak">
+          <h3>Panino Speak</h3>
+          <p>Panino con speak.</p>
+          <button onclick="addToCart('Panino Speak', 3)">Aggiungi al carrello - 3€</button>
+        </div>
+
+        <div class="panino">
+          <img src="https://sfiziedeliziepalermo.com/wp-content/uploads/2020/06/Bresaola-rucola-e-grana.jpeg" alt="Panino">
+          <h3>Panino Bresaola</h3>
+          <p>Panino con Bresaola, lattuga e scaglie.</p>
+          <button onclick="addToCart('Panino Bresaola', 2.70)">Aggiungi al carrello - 2.70€</button>
+        </div>
+      </section>
+   <footer class="panel">
+  <div class="footer-content">
+    <div class="social-links">
+      <a href="https://www.facebook.com" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1024px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" style="width: 25px; margin-right: 10px;">
+      </a>
+      <a href="https://www.instagram.com" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1024px-Instagram_logo_2022.svg.png" alt="Instagram" style="width: 25px;">
+      </a>
+    </div>
+    <div class="footer-text">
+      <p>&copy; 2025 Bar Nome - Tutti i diritti riservati</p>
+      <a href="privacy.html" style="color: var(--accent-color); text-decoration: none;">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+
+  <!-- Carrello -->
+  <div class="cart" id="cart">
+    <div class="cart-header">
+      <span>Carrello</span>
+      <button onclick="closeCart()">X</button>
+    </div>
+    <div id="cart-items"></div>
+    <div class="total">
+      <span>Total:</span>
+      <span id="cart-total">0€</span>
+    </div>
+    <button onclick="checkout()">Checkout</button>
+  </div>
+
+  <!-- Pulsante per aprire il carrello -->
+  <div class="show-cart" onclick="toggleCart()">🛒</div>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      cartItems.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `${item.name} - ${item.price}€`;
+        cartItems.appendChild(div);
+        total += item.price;
+      });
+      cartTotal.innerText = `${total}€`;
+    }
+
+    function toggleCart() {
+      document.getElementById('cart').classList.toggle('open');
+    }
+
+    function closeCart() {
+      document.getElementById('cart').classList.remove('open');
+    }
+
+    function checkout() {
+      alert('Grazie per il tuo ordine!');
+      cart = [];
+      updateCart();
+      closeCart();
+    }
+  </script>
+
+</body>
+</html>
