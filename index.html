@@ -6,7 +6,7 @@
   <title>Bar</title>
   <style>
     :root {
-      --sidebar-w: 300px; /* Larghezza del menu */
+      --sidebar-w: 250px; /* Larghezza del menu */
       --header-h: 100px; /* Altezza dell'header */
       --footer-h: 120px;
       --border: 1px solid #333;
@@ -52,6 +52,7 @@
       border: 1px solid #ddd;
       transition: background 0.3s, color 0.3s;
       font-size: 16px;
+      display: block; /* Gli elementi saranno uno sotto l'altro */
     }
 
     .left a:hover {
@@ -138,32 +139,13 @@
       display: inline-block;
     }
 
-    /* Responsive: nascondi il menu laterale sotto 1024px */
-    @media (max-width: 1024px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-      .left {
-        display: none; /* Nascondi il menu laterale per tablet */
-      }
-      header.panel {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-      }
-      .content {
-        padding: 15px;
-      }
-      .content img {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        border-radius: 10px;
-      }
-    }
-
     /* Menu mobile */
     @media (max-width: 600px) {
+      .layout {
+        grid-template-columns: 1fr; /* Una colonna per dispositivi mobili */
+      }
+
+      /* Menu laterale mobile */
       .left {
         display: block;
         position: fixed;
@@ -172,7 +154,7 @@
         height: 100%;
         width: 250px; /* Larghezza menu mobile */
         background: var(--menu-bg);
-        transition: left 0.3s ease; /* Transizione più fluida */
+        transition: left 0.3s ease; /* Transizione fluida */
         padding-top: 60px;
       }
 
@@ -190,7 +172,7 @@
       }
 
       .left.show {
-        left: 0;
+        left: 0; /* Mostra il menu quando è attivo */
       }
 
       .footer-text {
@@ -199,6 +181,16 @@
 
       .content img {
         width: 80%;
+      }
+    }
+
+    /* Layout per schermi più grandi */
+    @media (min-width: 601px) {
+      .left {
+        left: 0; /* Menu visibile su schermi più grandi */
+      }
+      .hamburger-menu {
+        display: none; /* Nasconde l'icona hamburger su schermi più grandi */
       }
     }
   </style>
