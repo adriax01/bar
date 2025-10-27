@@ -39,7 +39,7 @@
       padding: 20px;
       background: var(--menu-bg);
       box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-      height: 100%; /* Esteso per coprire tutta l'altezza della pagina */
+      height: 100%;
     }
 
     .left a {
@@ -108,9 +108,9 @@
     /* Footer */
     footer.panel {
       border-top: var(--border);
-      padding: 10px 0; /* Riduce l'altezza del footer */
-      text-align: center; /* Centra tutto il contenuto del footer */
-      background-color: var(--menu-bg); /* Puoi cambiarlo in base alla tua palette */
+      padding: 10px 0;
+      text-align: center;
+      background-color: var(--menu-bg);
     }
 
     .footer-content {
@@ -121,40 +121,86 @@
     }
 
     .social-links {
-      margin-bottom: 10px; /* Aggiunge un po' di spazio tra le icone e il testo */
+      margin-bottom: 10px;
     }
 
     .social-links a {
-      margin: 0 8px; /* Distanza tra le icone */
+      margin: 0 8px;
     }
 
     .footer-text {
-      font-size: 14px; /* Diminuisce la dimensione del testo */
+      font-size: 14px;
     }
 
     .footer-text a {
-      font-size: 14px; /* Diminuisce la dimensione del testo del link */
+      font-size: 14px;
       margin-top: 5px;
       display: inline-block;
     }
 
-    /* Responsive: nascondi laterali sotto 900px */
-    @media (max-width: 900px) {
-      .layout { grid-template-columns: 1fr; }
-      .left { display: none; }
-      .center .content { border-left: 0; border-right: 0; }
+    /* Responsive: nascondi laterali sotto 1024px */
+    @media (max-width: 1024px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .left {
+        display: block;
+        width: 100%;
+        padding: 10px;
+      }
+      header.panel {
+        padding: 10px;
+      }
+      .content {
+        padding: 15px;
+      }
+      .content img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
     }
 
-    /* Modifica header per la versione più compatta */
-    @media (max-width: 768px) {
-      header.panel {
-        height: 120px; /* Header più compatto */
-        padding: 0 20px;
+    /* Ottimizzazione per dispositivi mobili */
+    @media (max-width: 600px) {
+      .left {
+        display: none;
       }
 
-      .left {
-        height: auto; /* Rende il menu più corto */
+      .hamburger-menu {
+        display: block;
+        font-size: 30px;
+        cursor: pointer;
+        margin: 10px;
+      }
+
+      .content {
         padding: 10px;
+        font-size: 14px;
+      }
+
+      .footer-text {
+        font-size: 12px;
+      }
+
+      .content img {
+        width: 80%;
+      }
+    }
+
+    /* Ottimizzazioni per schermi molto piccoli */
+    @media (max-width: 375px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .content {
+        font-size: 12px;
+      }
+
+      .footer-text {
+        font-size: 10px;
       }
     }
   </style>
@@ -180,11 +226,12 @@
       <section class="content">
         <h1>Benvenuto nel nostro Bar!</h1>
         <p>Vieni a trovarci e scopri il nostro angolo di felicità! Offriamo panini gourmet, cocktail unici e un'atmosfera accogliente. Ogni momento al nostro bar è speciale. Unisciti a noi per una pausa rilassante nel cuore della città.</p>
-  <img src="immagini/aa925624-9fbf-44a9-8cc8-051ef8bed879.png" alt="Descrizione dell'immagine" style="max-width: 400px; height: auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <img src="immagini/aa925624-9fbf-44a9-8cc8-051ef8bed879.png" alt="Descrizione dell'immagine" style="max-width: 400px; height: auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
         <a href="Panini.html" style="text-decoration: none; background-color: var(--primary-color); color: white; padding: 15px 30px; border-radius: 5px; font-size: 16px; display: inline-block; margin-top: 20px;">Scopri il nostro Menu</a>
       </section>
     </main>
   </div>
+
   <footer class="panel">
     <div class="footer-content">
       <div class="social-links">
@@ -201,5 +248,13 @@
       </div>
     </div>
   </footer>
+
+  <div class="hamburger-menu" onclick="toggleMenu()">&#9776;</div>
+  <script>
+    function toggleMenu() {
+      var menu = document.querySelector('.left');
+      menu.style.display = (menu.style.display === 'block' ? 'none' : 'block');
+    }
+  </script>
 </body>
 </html>
