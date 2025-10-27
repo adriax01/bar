@@ -6,24 +6,24 @@
   <title>Panini - Bar</title>
   <style>
     :root{
-      --sidebar-w: 300px;
-      --header-h: 100px;
+      --sidebar-w: 300px; /* Larghezza del menu */
+      --header-h: 100px; /* Altezza dell'header */
       --footer-h: 120px;
       --border: 1px solid #333;
       --bg: #fff;
-      --primary-color: #FF6F61;
-      --secondary-color: #F4A300;
-      --accent-color: #2C3E50;
-      --light-bg: #F7F7F7;
-      --menu-bg: #F4F4F4;
-      --menu-hover: #FF6F61;
+      --primary-color: #FF6F61; /* Corallo caldo */
+      --secondary-color: #F4A300; /* Arancione dorato */
+      --accent-color: #2C3E50; /* Blu scuro */
+      --light-bg: #F7F7F7; /* Grigio chiaro */
+      --menu-bg: #F4F4F4; /* Colore di sfondo per il menu */
+      --menu-hover: #FF6F61; /* Colore di hover per il menu */
       --card-bg: #ffffff;
-      --card-shadow: rgba(0, 0, 0, 0.1);
+      --card-shadow: rgba(0, 0, 0, 0.1); /* Ombra della card */
       --card-border-radius: 10px;
-      --img-height: 200px;
-      --img-width: 200px;
-      --cart-width: 350px;
-      --cart-height: 500px;
+      --img-height: 200px; /* Altezza uniforme per tutte le immagini */
+      --img-width: 200px; /* Larghezza uniforme per tutte le immagini */
+      --cart-width: 350px; /* Larghezza maggiore per il carrello */
+      --cart-height: 500px; /* Altezza maggiore per il carrello */
     }
 
     * { box-sizing: border-box; }
@@ -85,6 +85,7 @@
       padding: 20px;
       overflow: auto;
       grid-area: content;
+      justify-items: center; /* Centra il contenuto */
     }
 
     /* Header */
@@ -112,9 +113,8 @@
       gap: 20px;
       padding: 20px;
       background-color: var(--light-bg);
-      grid-template-rows: repeat(2, 1fr); /* Due righe per i panini */
       width: 100%; /* Per sfruttare tutta la larghezza disponibile */
-      margin: 0;
+      justify-items: stretch; /* Per fare in modo che ogni card si adatti alla larghezza */
     }
 
     .panino {
@@ -298,7 +298,7 @@
       }
 
       .content {
-        grid-template-columns: repeat(2, 1fr); /* 2 panini per riga su dispositivi piccoli */
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .cart {
@@ -386,7 +386,6 @@
         </div>
       </section>
     </main>
-
   </div>
 
   <!-- Carrello -->
