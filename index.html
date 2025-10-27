@@ -168,11 +168,11 @@
         display: block;
         position: fixed;
         top: 0;
-        left: -250px;
+        left: -250px; /* Menu nascosto inizialmente */
         height: 100%;
-        width: 250px;
+        width: 250px; /* Larghezza menu mobile */
         background: var(--menu-bg);
-        transition: left 0.3s ease;
+        transition: left 0.3s ease; /* Transizione più fluida */
         padding-top: 60px;
       }
 
@@ -251,7 +251,7 @@
   <script>
     function toggleMenu() {
       var menu = document.querySelector('.left');
-      menu.classList.toggle('show'); /* Toggle della classe 'show' per aprire/chiudere il menu */
+      menu.classList.toggle('show');  // Toglia o aggiungi la classe per aprire/chiudere il menu
     }
   </script>
 
