@@ -75,13 +75,13 @@
     header.panel {
       border-bottom: var(--border);
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       padding: 0 40px;
       background-color: var(--primary-color);
       color: #fff;
       height: var(--header-h);
-      width: 100%; /* Assicura che l'header si estenda su tutta la larghezza */
+      width: 100%;
     }
 
     /* Logo Header */
@@ -138,17 +138,17 @@
       display: inline-block;
     }
 
-    /* Responsive: nascondi laterali sotto 1024px */
+    /* Responsive: nascondi il menu laterale sotto 1024px */
     @media (max-width: 1024px) {
       .layout {
         grid-template-columns: 1fr;
       }
       .left {
-        display: block;
-        width: 100%;
-        padding: 10px;
+        display: none; /* Nascondi il menu laterale per tablet */
       }
       header.panel {
+        display: flex;
+        justify-content: space-between;
         padding: 10px;
       }
       .content {
@@ -162,22 +162,35 @@
       }
     }
 
-    /* Ottimizzazione per dispositivi mobili */
+    /* Menu mobile */
     @media (max-width: 600px) {
       .left {
-        display: none;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: -250px;
+        height: 100%;
+        width: 250px;
+        background: var(--menu-bg);
+        transition: left 0.3s ease;
+        padding-top: 60px;
+      }
+
+      .left a {
+        padding: 20px;
+        font-size: 18px;
       }
 
       .hamburger-menu {
         display: block;
         font-size: 30px;
         cursor: pointer;
-        margin: 10px;
+        margin: 15px;
+        color: white;
       }
 
-      .content {
-        padding: 10px;
-        font-size: 14px;
+      .left.show {
+        left: 0;
       }
 
       .footer-text {
@@ -186,21 +199,6 @@
 
       .content img {
         width: 80%;
-      }
-    }
-
-    /* Ottimizzazioni per schermi molto piccoli */
-    @media (max-width: 375px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .content {
-        font-size: 12px;
-      }
-
-      .footer-text {
-        font-size: 10px;
       }
     }
   </style>
@@ -222,6 +220,7 @@
     <main class="center">
       <header class="panel">
         <div class="logo">Bar</div>
+        <div class="hamburger-menu" onclick="toggleMenu()">&#9776;</div>
       </header>
       <section class="content">
         <h1>Benvenuto nel nostro Bar!</h1>
@@ -249,12 +248,12 @@
     </div>
   </footer>
 
-  <div class="hamburger-menu" onclick="toggleMenu()">&#9776;</div>
   <script>
     function toggleMenu() {
       var menu = document.querySelector('.left');
-      menu.style.display = (menu.style.display === 'block' ? 'none' : 'block');
+      menu.classList.toggle('show'); /* Toggle della classe 'show' per aprire/chiudere il menu */
     }
   </script>
+
 </body>
 </html>
