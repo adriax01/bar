@@ -301,9 +301,71 @@
         height: 400px;
       }
     }
+    /* === Drawer menu MOBILE, senza toccare il desktop === */
+@media (max-width: 900px) {
+  /* quando è chiuso resta nascosto (rimane valida la tua regola .left {display:none}) */
+  .left.is-open {
+    display: block;              /* sovrascrive display:none */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(260px, 80vw);
+    height: 100vh;
+    padding: 20px;
+    background: var(--menu-bg);
+    border-right: var(--border);
+    box-shadow: 2px 0 14px rgba(0,0,0,.18);
+    overflow-y: auto;
+    transform: translateX(0);
+    z-index: 1000;
+  }
+
+  /* bottone hamburger visibile solo su mobile */
+  .mobile-toggle {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 1100;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+
+  /* backdrop quando il menu è aperto */
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(1px);
+    z-index: 900;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* link del menu uno sotto l'altro */
+  .left.is-open a { display: block; margin: 8px 0; }
+}
+
   </style>
 </head>
 <body>
+<button class="mobile-toggle" aria-label="Apri menu" onclick="toggleMenu()">☰</button>
+<div id="backdrop" class="backdrop" onclick="closeMenu()"></div>
 
   <div class="layout">
     <!-- Colonna sinistra (Menu) -->
@@ -338,7 +400,7 @@
         </div>
 
         <div class="bibita">
-          <img src="https://gecoshop.com/5600-large_default/sprite-can-24-cans-x-33-cl.jpg" alt="Sprite">
+          <img src="https://www.lasorgente.net/593909-large_default/sprite-33-cl-lattina.jpg" alt="Sprite">
           <h3>Sprite</h3>
           <p>Bibita gassata al limone.</p>
           <button onclick="addToCart('Sprite', 1.40)">Aggiungi al carrello - 1.40€</button>
@@ -452,6 +514,22 @@
       updateCart();
       closeCart();
     }
+    function toggleMenu() {
+  const menu = document.querySelector('.left');
+  const backdrop = document.getElementById('backdrop');
+  const isOpen = menu.classList.toggle('is-open');
+  backdrop.classList.toggle('show', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+function closeMenu() {
+  const menu = document.querySelector('.left');
+  const backdrop = document.getElementById('backdrop');
+  menu.classList.remove('is-open');
+  backdrop.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
   </script>
 
 </body>
