@@ -46,7 +46,7 @@
       padding: 20px;
       background: var(--menu-bg);
       box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-      height: 100%; /* Esteso per coprire tutta l'altezza della pagina */
+      height: 100%;
     }
 
     .left a {
@@ -153,37 +153,37 @@
     }
 
     /* Footer */
-  footer.panel {
-  border-top: var(--border);
-  padding: 10px 0; /* Riduce l'altezza del footer */
-  text-align: center; /* Centra tutto il contenuto del footer */
-  background-color: var(--menu-bg); /* Puoi cambiarlo in base alla tua palette */
-}
+    footer.panel {
+      border-top: var(--border);
+      padding: 10px 0; /* Riduce l'altezza del footer */
+      text-align: center; /* Centra tutto il contenuto del footer */
+      background-color: var(--menu-bg); /* Puoi cambiarlo in base alla tua palette */
+    }
 
-.footer-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-.social-links {
-  margin-bottom: 10px; /* Aggiunge un po' di spazio tra le icone e il testo */
-}
+    .social-links {
+      margin-bottom: 10px; /* Aggiunge un po' di spazio tra le icone e il testo */
+    }
 
-.social-links a {
-  margin: 0 8px; /* Distanza tra le icone */
-}
+    .social-links a {
+      margin: 0 8px; /* Distanza tra le icone */
+    }
 
-.footer-text {
-  font-size: 14px; /* Diminuisce la dimensione del testo */
-}
+    .footer-text {
+      font-size: 14px; /* Diminuisce la dimensione del testo */
+    }
 
-.footer-text a {
-  font-size: 14px; /* Diminuisce la dimensione del testo del link */
-  margin-top: 5px;
-  display: inline-block;
-}
+    .footer-text a {
+      font-size: 14px; /* Diminuisce la dimensione del testo del link */
+      margin-top: 5px;
+      display: inline-block;
+    }
 
     /* Carrello */
     .cart {
@@ -293,7 +293,6 @@
       }
     }
     /* ===== MOBILE-ONLY: left menu a scomparsa (drawer) ===== */
-/* Modifica per il menu mobile (drawer) */
 @media (max-width: 900px) {
   /* Menu mobile drawer */
   .left.is-open {
@@ -384,53 +383,6 @@
   /* Carrello più stretto e alto quanto basta */
   .cart { width: 90%; height: 60vh; right: 5%; left: 5%; }
 }
-/* Pulsante per aprire il menu (hamburger) */
-.mobile-toggle {
-  display: none; /* Si vede solo su mobile */
-}
-
-@media (max-width: 900px) {
-  .mobile-toggle {
-    display: inline-flex;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 12px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 22px;
-    z-index: 10000; /* Assicura che il pulsante sia sopra tutto */
-    box-shadow: 0 2px 8px rgba(0,0,0,.15);
-  }
-}
-
-/* Pulsante per aprire il carrello */
-.show-cart {
-  position: fixed;
-  bottom: 100px; /* Distanza dal basso per non coprire altri elementi */
-  right: 20px;
-  background-color: var(--primary-color);
-  color: white;
-  padding: 15px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 22px;
-  z-index: 10000; /* Assicura che il pulsante sia sopra tutto */
-  box-shadow: 0 2px 8px rgba(0,0,0,.15);
-}
-
-.show-cart:hover {
-  background-color: var(--secondary-color);
-}
-
-@media (max-width: 768px) {
-  .show-cart {
-    bottom: 120px; /* Adatta la posizione per dispositivi mobili */
-  }
-}
-
   </style>
 </head>
 <body>
@@ -442,12 +394,6 @@
 
 <!-- Pulsante per il carrello -->
 <div class="show-cart" onclick="toggleCart()">🛒</div>
-
-<!-- Pulsante hamburger visibile solo su mobile -->
-<button class="mobile-toggle" aria-label="Apri menu" onclick="toggleMenu()">☰</button>
-
-<!-- Backdrop per chiudere il menu con tap -->
-<div id="backdrop" class="backdrop" onclick="closeMenu()"></div>
 
   <div class="layout">
     <!-- Colonna sinistra (Menu) -->
@@ -596,46 +542,23 @@
       updateCart();
       closeCart();
     }
-    // ===== Drawer menu mobile =====
-function toggleMenu() {
-  const menu = document.querySelector('.left');
-  const backdrop = document.getElementById('backdrop');
-  const isOpen = menu.classList.toggle('is-open');
-  backdrop.classList.toggle('show', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-}
-function closeMenu() {
-  const menu = document.querySelector('.left');
-  const backdrop = document.getElementById('backdrop');
-  menu.classList.remove('is-open');
-  backdrop.classList.remove('show');
-  document.body.style.overflow = '';
-}
-// Funzione per aprire/chiudere il menu mobile
-function toggleMenu() {
-  const menu = document.querySelector('.left');
-  const backdrop = document.getElementById('backdrop');
-  const isOpen = menu.classList.toggle('is-open');
-  backdrop.classList.toggle('show', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-}
-function closeMenu() {
-  const menu = document.querySelector('.left');
-  const backdrop = document.getElementById('backdrop');
-  menu.classList.remove('is-open');
-  backdrop.classList.remove('show');
-  document.body.style.overflow = '';
-}
 
-// Funzione per aprire/chiudere il carrello
-function toggleCart() {
-  document.getElementById('cart').classList.toggle('open');
-}
-function closeCart() {
-  document.getElementById('cart').classList.remove('open');
-}
+    // Funzioni per il menu
+    function toggleMenu() {
+      const menu = document.querySelector('.left');
+      const backdrop = document.getElementById('backdrop');
+      const isOpen = menu.classList.toggle('is-open');
+      backdrop.classList.toggle('show', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
 
+    function closeMenu() {
+      const menu = document.querySelector('.left');
+      const backdrop = document.getElementById('backdrop');
+      menu.classList.remove('is-open');
+      backdrop.classList.remove('show');
+      document.body.style.overflow = '';
+    }
   </script>
-
 </body>
 </html>
