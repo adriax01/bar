@@ -104,8 +104,6 @@
       gap: 20px;
       padding: 20px;
       background-color: var(--light-bg);
-      margin: 0 auto; /* Centra il contenuto */
-      max-width: 90%; /* Limita la larghezza */
     }
 
     .panino {
@@ -124,8 +122,8 @@
 
     /* Uniforma la grandezza delle immagini */
     .panino img {
-      width: 100%;
-      height: auto;
+      width: var(--img-width);
+      height: var(--img-height);
       border-radius: 8px;
       object-fit: cover;
     }
@@ -155,37 +153,37 @@
     }
 
     /* Footer */
-    footer.panel {
-      border-top: var(--border);
-      padding: 10px 0; /* Riduce l'altezza del footer */
-      text-align: center;
-      background-color: var(--menu-bg);
-    }
+  footer.panel {
+  border-top: var(--border);
+  padding: 10px 0; /* Riduce l'altezza del footer */
+  text-align: center; /* Centra tutto il contenuto del footer */
+  background-color: var(--menu-bg); /* Puoi cambiarlo in base alla tua palette */
+}
 
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-    .social-links {
-      margin-bottom: 10px;
-    }
+.social-links {
+  margin-bottom: 10px; /* Aggiunge un po' di spazio tra le icone e il testo */
+}
 
-    .social-links a {
-      margin: 0 8px;
-    }
+.social-links a {
+  margin: 0 8px; /* Distanza tra le icone */
+}
 
-    .footer-text {
-      font-size: 14px;
-    }
+.footer-text {
+  font-size: 14px; /* Diminuisce la dimensione del testo */
+}
 
-    .footer-text a {
-      font-size: 14px;
-      margin-top: 5px;
-      display: inline-block;
-    }
+.footer-text a {
+  font-size: 14px; /* Diminuisce la dimensione del testo del link */
+  margin-top: 5px;
+  display: inline-block;
+}
 
     /* Carrello */
     .cart {
@@ -197,8 +195,8 @@
       border-radius: 15px;
       box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
       border: 2px solid var(--primary-color);
-      width: var(--cart-width);
-      height: var(--cart-height);
+      width: var(--cart-width); /* Larghezza maggiore per il carrello */
+      height: var(--cart-height); /* Altezza maggiore per il carrello */
       overflow-y: auto;
       transition: transform 0.3s ease;
       transform: translateX(100%);
@@ -276,12 +274,12 @@
     /* Modifica header per la versione più compatta */
     @media (max-width: 768px) {
       header.panel {
-        height: 120px;
+        height: 120px; /* Header più compatto */
         padding: 0 20px;
       }
 
       .left {
-        height: auto;
+        height: auto; /* Rende il menu più corto */
         padding: 10px;
       }
 
@@ -290,22 +288,99 @@
       }
 
       .cart {
-        width: 80%;
+        width: 80%; /* Ridotto per schermi piccoli */
         height: 400px;
       }
     }
+    /* ===== MOBILE-ONLY: left menu a scomparsa (drawer) ===== */
+@media (max-width: 900px) {
+  /* Mantieni 1 colonna di layout; non alteriamo il desktop */
+  .layout { grid-template-columns: 1fr; }
+
+  /* Trasformiamo il menu sinistro in un drawer che scorre da sinistra */
+  .left {
+    display: block;                 /* visibile come elemento (ma fuori schermo) */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(260px, 80vw);
+    height: 100vh;
+    padding: 20px;
+    background: var(--menu-bg);
+    border-right: var(--border);
+    box-shadow: 2px 0 14px rgba(0,0,0,.18);
+    overflow-y: auto;
+    transform: translateX(-100%);   /* fuori schermo di default */
+    transition: transform .3s ease;
+    z-index: 1000;
+  }
+  .left.is-open { transform: translateX(0); }
+
+  /* Pulsante hamburger */
+  .mobile-toggle {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 1100;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+
+  /* Sfondo oscurante quando il menu è aperto */
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(1px);
+    z-index: 900;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Griglia panini più comoda su mobile */
+  .content { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 520px) {
+  /* Sotto i 520px un panino per riga */
+  .content { grid-template-columns: 1fr; }
+
+  /* Carrello più stretto e alto quanto basta */
+  .cart { width: 90%; height: 60vh; right: 5%; left: 5%; }
+}
   </style>
 </head>
 <body>
+<!-- Pulsante hamburger visibile solo su mobile -->
+<button class="mobile-toggle" aria-label="Apri menu" onclick="toggleMenu()">☰</button>
+
+<!-- Backdrop per chiudere il menu con tap -->
+<div id="backdrop" class="backdrop" onclick="closeMenu()"></div>
 
   <div class="layout">
     <!-- Colonna sinistra (Menu) -->
     <aside class="left">
       <div class="logo">BAR</div>
       <a href="index.html" class="active">Home</a>
-      <a href="Panini.html" class="active">Panini</a>
-      <a href="Bibite.html">Bibite</a>
-      <a href="Contatti.html">Contatti</a>
+      <a href="Panini.html" class="active">Panini</a> <!-- Link alla pagina Panini.html -->
+      <a href="Bibite.html">Bibite</a> <!-- Link alla pagina Bibite.html -->
+      <a href="Contatti.html">Contatti</a> <!-- Link alla pagina Contatti -->
       <a href="Informazioni.html" class="active">Informazioni</a>
     </aside>
 
@@ -315,7 +390,7 @@
         <div class="logo">Panini</div>
       </header>
       <section class="content">
-        <!-- Panini examples -->
+        <!-- Esempio di Panino -->
         <div class="panino">
           <img src="https://sfiziedeliziepalermo.com/wp-content/uploads/2020/06/prosciutto.jpeg" alt="Panino Prosciutto">
           <h3>Panino Prosciutto</h3>
@@ -373,26 +448,41 @@
           <button onclick="addToCart('Panino Bresaola', 2.70)">Aggiungi al carrello - 2.70€</button>
         </div>
       </section>
-   </main>
+   <footer class="panel">
+  <div class="footer-content">
+    <div class="social-links">
+      <a href="https://www.facebook.com" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1024px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" style="width: 25px; margin-right: 10px;">
+      </a>
+      <a href="https://www.instagram.com" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1024px-Instagram_logo_2022.svg.png" alt="Instagram" style="width: 25px;">
+      </a>
+    </div>
+    <div class="footer-text">
+      <p>&copy; 2025 Bar Nome - Tutti i diritti riservati</p>
+      <a href="privacy.html" style="color: var(--accent-color); text-decoration: none;">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+
+  <!-- Carrello -->
+  <div class="cart" id="cart">
+    <div class="cart-header">
+      <span>Carrello</span>
+      <button onclick="closeCart()">X</button>
+    </div>
+    <div id="cart-items"></div>
+    <div class="total">
+      <span>Total:</span>
+      <span id="cart-total">0€</span>
+    </div>
+    <button onclick="checkout()">Checkout</button>
   </div>
 
-  <!-- Aggiungi il carrello qui -->
-  <footer class="panel">
-    <div class="footer-content">
-      <div class="social-links">
-        <a href="https://www.facebook.com" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1024px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" style="width: 25px; margin-right: 10px;">
-        </a>
-        <a href="https://www.instagram.com" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1024px-Instagram_logo_2022.svg.png" alt="Instagram" style="width: 25px;">
-        </a>
-      </div>
-      <div class="footer-text">
-        <p>&copy; 2025 Bar Nome - Tutti i diritti riservati</p>
-        <a href="privacy.html" style="color: var(--accent-color); text-decoration: none;">Privacy Policy</a>
-      </div>
-    </div>
-  </footer>
+  <!-- Pulsante per aprire il carrello -->
+  <div class="show-cart" onclick="toggleCart()">🛒</div>
+
   <script>
     let cart = [];
 
@@ -430,6 +520,22 @@
       updateCart();
       closeCart();
     }
+    // ===== Drawer menu mobile =====
+function toggleMenu() {
+  const menu = document.querySelector('.left');
+  const backdrop = document.getElementById('backdrop');
+  const isOpen = menu.classList.toggle('is-open');
+  backdrop.classList.toggle('show', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+function closeMenu() {
+  const menu = document.querySelector('.left');
+  const backdrop = document.getElementById('backdrop');
+  menu.classList.remove('is-open');
+  backdrop.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
   </script>
 
 </body>
