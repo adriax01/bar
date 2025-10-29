@@ -293,13 +293,11 @@
       }
     }
     /* ===== MOBILE-ONLY: left menu a scomparsa (drawer) ===== */
+/* Modifica per il menu mobile (drawer) */
 @media (max-width: 900px) {
-  /* Mantieni 1 colonna di layout; non alteriamo il desktop */
-  .layout { grid-template-columns: 1fr; }
-
-  /* Trasformiamo il menu sinistro in un drawer che scorre da sinistra */
-  .left {
-    display: block;                 /* visibile come elemento (ma fuori schermo) */
+  /* Menu mobile drawer */
+  .left.is-open {
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
@@ -310,11 +308,33 @@
     border-right: var(--border);
     box-shadow: 2px 0 14px rgba(0,0,0,.18);
     overflow-y: auto;
-    transform: translateX(-100%);   /* fuori schermo di default */
-    transition: transform .3s ease;
+    transform: translateX(0);
     z-index: 1000;
   }
-  .left.is-open { transform: translateX(0); }
+
+  .left a {
+    display: block; /* Assicura che ogni link sia un blocco (una sotto l’altra) */
+    text-decoration: none;
+    color: var(--accent-color);
+    padding: 15px;
+    margin: 8px 0;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: background 0.3s, color 0.3s;
+    font-size: 16px;
+  }
+
+  .left a:hover {
+    background: var(--menu-hover);
+    color: white;
+  }
+
+  .left a.active {
+    background: var(--primary-color);
+    color: white;
+  }
+}
 
   /* Pulsante hamburger */
   .mobile-toggle {
