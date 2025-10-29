@@ -173,10 +173,90 @@
   display: inline-block;
 }
 
+/* ===== MOBILE drawer menu (non tocca il desktop) ===== */
+@media (max-width: 900px) {
+  /* La tua regola .left {display:none} resta valida.
+     Quando aggiungiamo .is-open lo mostriamo come drawer */
+  .left.is-open {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(260px, 80vw);
+    height: 100vh;
+    padding: 20px;
+    background: var(--menu-bg);
+    border-right: var(--border);
+    box-shadow: 2px 0 14px rgba(0,0,0,.18);
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  .left.is-open a { display: block; margin: 8px 0; }
+
+  /* Bottone hamburger */
+  .mobile-toggle {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 1100;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+
+  /* Backdrop scuro quando il menu è aperto */
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(1px);
+    z-index: 900;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Migliorie mobile per la sezione contatti */
+  .layout { grid-template-columns: 1fr; }
+  .center .contact-form {
+    padding: 16px;
+    gap: 14px;
+  }
+  .contact-form form {
+    width: 100%;
+  }
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form button {
+    font-size: 16px;    /* evita zoom su iOS */
+  }
+  .contact-form input {
+    height: 48px;       /* target touch comodo */
+  }
+  .contact-form button {
+    height: 48px;
+  }
+}
 
   </style>
 </head>
 <body>
+<button class="mobile-toggle" aria-label="Apri menu" onclick="toggleMenu()">☰</button>
+<div id="backdrop" class="backdrop" onclick="closeMenu()"></div>
 
   <div class="layout">
     <!-- Colonna sinistra (Menu) -->
@@ -195,7 +275,6 @@
         <div class="logo">Contatti</div>
       </header>
       <section class="contact-form">
-        <h2>Contattaci</h2>
         <form id="contactForm">
           <label for="name">Nome:</label>
           <input type="text" id="name" name="name" required>
@@ -238,6 +317,22 @@
       // Azzera il modulo
       document.getElementById('contactForm').reset();
     });
+    <script>
+  function toggleMenu() {
+    const menu = document.querySelector('.left');
+    const backdrop = document.getElementById('backdrop');
+    const isOpen = menu.classList.toggle('is-open');
+    backdrop.classList.toggle('show', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+  function closeMenu() {
+    const menu = document.querySelector('.left');
+    const backdrop = document.getElementById('backdrop');
+    menu.classList.remove('is-open');
+    backdrop.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
   </script>
 
 </body>
