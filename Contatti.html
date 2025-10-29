@@ -174,11 +174,11 @@
 }
 
 /* ===== MOBILE drawer menu (non tocca il desktop) ===== */
+/* Menu mobile: drawer a scomparsa */
 @media (max-width: 900px) {
-  /* La tua regola .left {display:none} resta valida.
-     Quando aggiungiamo .is-open lo mostriamo come drawer */
-  .left.is-open {
-    display: block;
+  /* Menu a sinistra (Colonna sinistra), inizialmente nascosto su mobile */
+  .left {
+    display: none; /* Resta nascosto per default */
     position: fixed;
     top: 0;
     left: 0;
@@ -188,12 +188,21 @@
     background: var(--menu-bg);
     border-right: var(--border);
     box-shadow: 2px 0 14px rgba(0,0,0,.18);
-    overflow-y: auto;
     z-index: 1000;
   }
-  .left.is-open a { display: block; margin: 8px 0; }
 
-  /* Bottone hamburger */
+  /* Mostra il menu quando è aperto */
+  .left.is-open {
+    display: block;  /* Mostra il menu */
+  }
+
+  /* Link nel menu */
+  .left a {
+    display: block;
+    margin: 8px 0;
+  }
+
+  /* Pulsante hamburger per il menu mobile */
   .mobile-toggle {
     position: fixed;
     top: 14px;
@@ -214,7 +223,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,.15);
   }
 
-  /* Backdrop scuro quando il menu è aperto */
+  /* Backdrop scuro per chiudere il menu */
   .backdrop {
     position: fixed;
     inset: 0;
@@ -225,38 +234,41 @@
     pointer-events: none;
     transition: opacity .3s ease;
   }
+
   .backdrop.show {
     opacity: 1;
     pointer-events: auto;
   }
 
-  /* Migliorie mobile per la sezione contatti */
+  /* Griglia contatti più comoda per mobile */
   .layout { grid-template-columns: 1fr; }
-  .center .contact-form {
+  .contact-form {
     padding: 16px;
     gap: 14px;
   }
-  .contact-form form {
-    width: 100%;
-  }
+
   .contact-form input,
   .contact-form textarea,
   .contact-form button {
     font-size: 16px;    /* evita zoom su iOS */
   }
+
   .contact-form input {
     height: 48px;       /* target touch comodo */
   }
+
   .contact-form button {
     height: 48px;
   }
 }
+
 
   </style>
 </head>
 <body>
 <button class="mobile-toggle" aria-label="Apri menu" onclick="toggleMenu()">☰</button>
 <div id="backdrop" class="backdrop" onclick="closeMenu()"></div>
+
 
   <div class="layout">
     <!-- Colonna sinistra (Menu) -->
@@ -275,6 +287,7 @@
         <div class="logo">Contatti</div>
       </header>
       <section class="contact-form">
+        <h2>Contattaci</h2>
         <form id="contactForm">
           <label for="name">Nome:</label>
           <input type="text" id="name" name="name" required>
@@ -317,21 +330,25 @@
       // Azzera il modulo
       document.getElementById('contactForm').reset();
     });
-    <script>
-  function toggleMenu() {
-    const menu = document.querySelector('.left');
-    const backdrop = document.getElementById('backdrop');
-    const isOpen = menu.classList.toggle('is-open');
-    backdrop.classList.toggle('show', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  }
-  function closeMenu() {
-    const menu = document.querySelector('.left');
-    const backdrop = document.getElementById('backdrop');
-    menu.classList.remove('is-open');
-    backdrop.classList.remove('show');
-    document.body.style.overflow = '';
-  }
+    
+ // Funzione per aprire/chiudere il menu mobile
+function toggleMenu() {
+  const menu = document.querySelector('.left');
+  const backdrop = document.getElementById('backdrop');
+  const isOpen = menu.classList.toggle('is-open'); // Aggiungi/Elimina la classe 'is-open'
+  backdrop.classList.toggle('show', isOpen); // Mostra/nasconde il backdrop
+  document.body.style.overflow = isOpen ? 'hidden' : ''; // Impedisce lo scroll quando il menu è aperto
+}
+
+// Funzione per chiudere il menu quando si clicca fuori
+function closeMenu() {
+  const menu = document.querySelector('.left');
+  const backdrop = document.getElementById('backdrop');
+  menu.classList.remove('is-open');  // Rimuovi la classe per chiudere il menu
+  backdrop.classList.remove('show'); // Rimuovi il backdrop
+  document.body.style.overflow = '';  // Rendi di nuovo possibile lo scroll
+}
+
 
   </script>
 
