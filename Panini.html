@@ -364,9 +364,65 @@
   /* Carrello più stretto e alto quanto basta */
   .cart { width: 90%; height: 60vh; right: 5%; left: 5%; }
 }
+/* Pulsante per aprire il menu (hamburger) */
+.mobile-toggle {
+  display: none; /* Si vede solo su mobile */
+}
+
+@media (max-width: 900px) {
+  .mobile-toggle {
+    display: inline-flex;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 22px;
+    z-index: 10000; /* Assicura che il pulsante sia sopra tutto */
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+}
+
+/* Pulsante per aprire il carrello */
+.show-cart {
+  position: fixed;
+  bottom: 100px; /* Distanza dal basso per non coprire altri elementi */
+  right: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+  z-index: 10000; /* Assicura che il pulsante sia sopra tutto */
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.show-cart:hover {
+  background-color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+  .show-cart {
+    bottom: 120px; /* Adatta la posizione per dispositivi mobili */
+  }
+}
+
   </style>
 </head>
 <body>
+  <!-- Pulsante hamburger per il menu mobile -->
+<button class="mobile-toggle" aria-label="Apri menu" onclick="toggleMenu()">☰</button>
+
+<!-- Backdrop per chiudere il menu -->
+<div id="backdrop" class="backdrop" onclick="closeMenu()"></div>
+
+<!-- Pulsante per il carrello -->
+<div class="show-cart" onclick="toggleCart()">🛒</div>
+
 <!-- Pulsante hamburger visibile solo su mobile -->
 <button class="mobile-toggle" aria-label="Apri menu" onclick="toggleMenu()">☰</button>
 
@@ -534,6 +590,29 @@ function closeMenu() {
   menu.classList.remove('is-open');
   backdrop.classList.remove('show');
   document.body.style.overflow = '';
+}
+// Funzione per aprire/chiudere il menu mobile
+function toggleMenu() {
+  const menu = document.querySelector('.left');
+  const backdrop = document.getElementById('backdrop');
+  const isOpen = menu.classList.toggle('is-open');
+  backdrop.classList.toggle('show', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+function closeMenu() {
+  const menu = document.querySelector('.left');
+  const backdrop = document.getElementById('backdrop');
+  menu.classList.remove('is-open');
+  backdrop.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// Funzione per aprire/chiudere il carrello
+function toggleCart() {
+  document.getElementById('cart').classList.toggle('open');
+}
+function closeCart() {
+  document.getElementById('cart').classList.remove('open');
 }
 
   </script>
