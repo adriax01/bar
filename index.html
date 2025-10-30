@@ -106,38 +106,52 @@
       text-align: center;
     }
 
-    /* Footer */
-    footer.panel {
-      border-top: var(--border);
-      padding: 10px 0;
-      text-align: center;
-      background-color: var(--menu-bg);
-    }
+   /* Footer */
+footer.panel {
+  border-top: var(--border);
+  padding: 10px 0;
+  text-align: center;
+  background-color: var(--menu-bg);
+}
 
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+/* Contenitore del footer */
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-    .social-links {
-      margin-bottom: 10px;
-    }
+/* Contenitore dei link social (icona Facebook, Instagram) */
+.social-links {
+  margin-top: 10px; /* Distanza tra le icone e il testo */
+  display: flex; /* Usa flexbox per allinearle orizzontalmente */
+  justify-content: center; /* Centra le icone orizzontalmente */
+}
 
-    .social-links a {
-      margin: 0 8px;
-    }
+.social-links a {
+  margin: 0 15px; /* Distanza tra le icone */
+  width: 30px; /* Imposta una larghezza fissa per le icone */
+  height: 30px; /* Imposta un'altezza fissa per le icone */
+}
 
-    .footer-text {
-      font-size: 14px;
-    }
+/* Footer - testo (copyright) */
+.footer-text {
+  font-size: 14px;
+}
 
-    .footer-text a {
-      font-size: 14px;
-      margin-top: 5px;
-      display: inline-block;
-    }
+/* Responsive - footer su dispositivi mobili */
+@media (max-width: 900px) {
+  .social-links {
+    margin-top: 10px; /* Spazio tra le icone e il testo */
+    gap: 20px; /* Distanza maggiore tra le icone sui dispositivi mobili */
+  }
+
+  .footer-text {
+    font-size: 12px;
+  }
+}
+
 
     /* Menu mobile */
 @media (max-width: 900px) {
