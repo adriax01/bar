@@ -22,13 +22,9 @@
     * { box-sizing: border-box; }
     html, body { height: 100%; margin: 0; background: var(--light-bg); }
 
-    /* Layout esterno */
-    .layout {
-      display: grid;
-      grid-template-columns: var(--sidebar-w) minmax(520px, 1fr) auto;
-      height: 100vh;
-      background: var(--bg);
-    }
+   /* Layout esterno */
+.layout { display: grid; grid-template-columns: var(--sidebar-w) minmax(520px, 1fr) auto; height: 100vh; background: var(--bg); }
+
 
     /* Colonna sinistra (Menu) */
     .left {
@@ -39,7 +35,7 @@
       padding: 20px;
       background: var(--menu-bg);
       box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-      height: 100%; /* Esteso per coprire tutta l'altezza della pagina */
+      height: 100%;
     }
 
     .left a {
@@ -71,7 +67,7 @@
       min-width: 0;
     }
 
-    /* Header - Esteso su tutta la pagina con sfondo rosa */
+    /* Header */
     header.panel {
       border-bottom: var(--border);
       display: flex;
@@ -121,8 +117,8 @@
     }
 
     .content .info-images img {
-      width: 400px; /* Aumentato da 300px a 400px */
-      height: 250px; /* Aumentato da 200px a 250px */
+      width: 400px;
+      height: 250px;
       object-fit: cover;
       border-radius: 10px;
       box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
@@ -131,8 +127,8 @@
     /* Footer */
     footer.panel {
       border-top: var(--border);
-      padding: 20px 0; /* Riduce l'altezza del footer */
-      text-align: center; /* Centra tutto il contenuto del footer */
+      padding: 20px 0;
+      text-align: center;
       background-color: var(--menu-bg);
     }
 
@@ -144,113 +140,80 @@
     }
 
     .social-links {
-      margin-bottom: 10px; /* Aggiunge un po' di spazio tra le icone e il testo */
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
     }
 
     .social-links a {
-      margin: 0 8px; /* Distanza tra le icone */
+      margin: 0 10px;
     }
 
     .footer-text {
-      font-size: 14px; /* Diminuisce la dimensione del testo */
+      font-size: 14px;
     }
 
     .footer-text a {
-      font-size: 14px; /* Diminuisce la dimensione del testo del link */
+      font-size: 14px;
       margin-top: 5px;
       display: inline-block;
     }
-/* Menu mobile: drawer a scomparsa */
-@media (max-width: 900px) {
-  /* Menu a sinistra (Colonna sinistra), inizialmente nascosto su mobile */
-  .left {
-    display: none; /* Resta nascosto per default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: min(260px, 80vw);
-    height: 100vh;
-    padding: 20px;
-    background: var(--menu-bg);
-    border-right: var(--border);
-    box-shadow: 2px 0 14px rgba(0,0,0,.18);
-    z-index: 1000;
-  }
 
-  /* Mostra il menu quando è aperto */
-  .left.is-open {
-    display: block;  /* Mostra il menu */
-  }
+    /* Menu mobile */
+    @media (max-width: 900px) {
+      .left {
+        display: none;
+      }
 
-  /* Link nel menu */
-  .left a {
-    display: block;
-    margin: 8px 0;
-  }
+      .left.is-open {
+        display: block;
+      }
 
-  /* Pulsante hamburger per il menu mobile */
-  .mobile-toggle {
-    position: fixed;
-    top: 14px;
-    left: 14px;
-    z-index: 1100;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: none;
-    background: var(--primary-color);
-    color: #fff;
-    font-size: 22px;
-    line-height: 1;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,.15);
-  }
+      .backdrop.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
 
-  /* Backdrop scuro per chiudere il menu */
-  .backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.35);
-    backdrop-filter: blur(1px);
-    z-index: 900;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .3s ease;
-  }
+    /* Pulsante hamburger per il menu mobile */
+    .mobile-toggle {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 1100;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: var(--primary-color);
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    }
 
-  .backdrop.show {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* Griglia contatti più comoda per mobile */
-  .layout { grid-template-columns: 1fr; }
-  .contact-form {
-    padding: 16px;
-    gap: 14px;
-  }
-
-  .contact-form input,
-  .contact-form textarea,
-  .contact-form button {
-    font-size: 16px;    /* evita zoom su iOS */
-  }
-
-  .contact-form input {
-    height: 48px;       /* target touch comodo */
-  }
-
-  .contact-form button {
-    height: 48px;
-  }
-}
-
+    /* Backdrop */
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(1px);
+      z-index: 900;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+    }
   </style>
 </head>
 <body>
+  <!-- Backdrop -->
+  <div id="backdrop" class="backdrop" onclick="closeMenu()"></div>
+
+  <!-- Pulsante hamburger -->
+  <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
 
   <div class="layout">
     <!-- Colonna sinistra (Menu) -->
@@ -271,15 +234,7 @@
 
       <section class="content">
         <h1>La Storia del Nostro Bar</h1>
-        <p>Il nostro bar è nato con un sogno semplice: creare un luogo dove le persone potessero sentirsi a casa, lontano dal trambusto della vita quotidiana. Fondato nel cuore della città, il bar ha iniziato come una piccola caffetteria, ma col tempo è diventato un vero e proprio punto di riferimento per chi cerca un ambiente accogliente e vivace.
-
-Sin dal primo giorno, abbiamo messo il cuore in ogni tazza di caffè, in ogni panino e in ogni cocktail preparato. La nostra missione è sempre stata quella di servire i clienti con il miglior servizio possibile, offrendo prodotti freschi e di qualità, che spaziano dai panini gourmet alle bevande creative.
-
-Nel corso degli anni, il nostro bar è diventato un angolo dove la comunità si incontra per condividere risate, storie e momenti speciali. Ogni angolo del nostro bar racconta una storia di amicizia, passione e convivialità.
-
-Abbiamo voluto creare un'atmosfera unica, dove ogni cliente, che sia un abituale o un nuovo visitatore, si senta accolto. Dai concerti dal vivo agli eventi tematici, siamo sempre alla ricerca di modi per portare qualcosa di speciale nella vita dei nostri clienti.
-
-Il nostro bar non è solo un luogo dove mangiare e bere, ma uno spazio dove nascono ricordi, si fanno nuove amicizie e ci si rilassa dopo una lunga giornata. Siamo orgogliosi di essere parte della comunità e di continuare a servire con passione e impegno, giorno dopo giorno.</p>
+        <p>Il nostro bar è nato con un sogno semplice: creare un luogo dove le persone potessero sentirsi a casa, lontano dal trambusto della vita quotidiana...</p>
         
         <div class="info-images">
           <img src="https://c8.alamy.com/compit/d9r6ey/ingresso-di-un-bar-trastevere-roma-della-provincia-di-roma-italia-d9r6ey.jpg" alt="Foto del bar 1">
@@ -308,25 +263,25 @@ Il nostro bar non è solo un luogo dove mangiare e bere, ma uno spazio dove nasc
       </div>
     </div>
   </footer>
+
   <script>
-// Funzione per aprire/chiudere il menu mobile
-function toggleMenu() {
-  const menu = document.querySelector('.left');
-  const backdrop = document.getElementById('backdrop');
-  const isOpen = menu.classList.toggle('is-open'); // Aggiungi/Elimina la classe 'is-open'
-  backdrop.classList.toggle('show', isOpen); // Mostra/nasconde il backdrop
-  document.body.style.overflow = isOpen ? 'hidden' : ''; // Impedisce lo scroll quando il menu è aperto
-}
+    // Funzione per aprire/chiudere il menu mobile
+    function toggleMenu() {
+      const menu = document.querySelector('.left');
+      const backdrop = document.getElementById('backdrop');
+      const isOpen = menu.classList.toggle('is-open');
+      backdrop.classList.toggle('show', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
 
-// Funzione per chiudere il menu quando si clicca fuori
-function closeMenu() {
-  const menu = document.querySelector('.left');
-  const backdrop = document.getElementById('backdrop');
-  menu.classList.remove('is-open');  // Rimuovi la classe per chiudere il menu
-  backdrop.classList.remove('show'); // Rimuovi il backdrop
-  document.body.style.overflow = '';  // Rendi di nuovo possibile lo scroll
-}
-
-</script>
+    // Funzione per chiudere il menu quando si clicca fuori
+    function closeMenu() {
+      const menu = document.querySelector('.left');
+      const backdrop = document.getElementById('backdrop');
+      menu.classList.remove('is-open');
+      backdrop.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  </script>
 </body>
 </html>
