@@ -175,11 +175,10 @@
 
 /* ===== MOBILE drawer menu (non tocca il desktop) ===== */
 /* Menu mobile: drawer a scomparsa */
-/* Layout per dispositivi mobili */
 @media (max-width: 900px) {
-  /* Colonna sinistra (Menu) */
+  /* Menu a sinistra (Colonna sinistra), inizialmente nascosto su mobile */
   .left {
-    display: none;
+    display: none; /* Resta nascosto per default */
     position: fixed;
     top: 0;
     left: 0;
@@ -194,7 +193,13 @@
 
   /* Mostra il menu quando è aperto */
   .left.is-open {
+    display: block;  /* Mostra il menu */
+  }
+
+  /* Link nel menu */
+  .left a {
     display: block;
+    margin: 8px 0;
   }
 
   /* Pulsante hamburger per il menu mobile */
@@ -267,15 +272,14 @@
 
   <div class="layout">
     <!-- Colonna sinistra (Menu) -->
-<aside class="left">
-  <div class="logo">BAR</div>
-  <a href="index.html" class="active">Home</a>
-  <a href="Panini.html">Panini</a>
-  <a href="Bibite.html">Bibite</a>
-  <a href="Contatti.html" class="active">Contatti</a> <!-- Link alla pagina Contatti -->
-  <a href="Informazioni.html" class="active">Informazioni</a>
-</aside>
-
+    <aside class="left">
+      <div class="logo">BAR</div>
+      <a href="index.html" class="active">Home</a>
+      <a href="Panini.html">Panini</a>
+      <a href="Bibite.html">Bibite</a>
+      <a href="Contatti.html" class="active">Contatti</a> <!-- Link alla pagina Contatti -->
+     <a href="Informazioni.html" class="active">Informazioni</a>    
+    </aside>
 
     <!-- Colonna centrale -->
     <main class="center">
@@ -327,24 +331,23 @@
       document.getElementById('contactForm').reset();
     });
     
-// Funzione per aprire/chiudere il menu mobile
+ // Funzione per aprire/chiudere il menu mobile
 function toggleMenu() {
   const menu = document.querySelector('.left');
   const backdrop = document.getElementById('backdrop');
-  const isOpen = menu.classList.toggle('is-open');
-  backdrop.classList.toggle('show', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
+  const isOpen = menu.classList.toggle('is-open'); // Aggiungi/Elimina la classe 'is-open'
+  backdrop.classList.toggle('show', isOpen); // Mostra/nasconde il backdrop
+  document.body.style.overflow = isOpen ? 'hidden' : ''; // Impedisce lo scroll quando il menu è aperto
 }
 
 // Funzione per chiudere il menu quando si clicca fuori
 function closeMenu() {
   const menu = document.querySelector('.left');
   const backdrop = document.getElementById('backdrop');
-  menu.classList.remove('is-open');
-  backdrop.classList.remove('show');
-  document.body.style.overflow = '';
+  menu.classList.remove('is-open');  // Rimuovi la classe per chiudere il menu
+  backdrop.classList.remove('show'); // Rimuovi il backdrop
+  document.body.style.overflow = '';  // Rendi di nuovo possibile lo scroll
 }
-
 
 
   </script>

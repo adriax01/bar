@@ -160,52 +160,88 @@
     }
 
     /* Menu mobile */
-    @media (max-width: 900px) {
-      .left {
-        display: none;
-      }
+   /* Layout per dispositivi mobili */
+@media (max-width: 900px) {
+  /* Colonna sinistra (Menu) */
+  .left {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(260px, 80vw);
+    height: 100vh;
+    padding: 20px;
+    background: var(--menu-bg);
+    border-right: var(--border);
+    box-shadow: 2px 0 14px rgba(0,0,0,.18);
+    z-index: 1000;
+  }
 
-      .left.is-open {
-        display: block;
-      }
+  /* Mostra il menu quando è aperto */
+  .left.is-open {
+    display: block;
+  }
 
-      .backdrop.show {
-        opacity: 1;
-        pointer-events: auto;
-      }
-    }
+  /* Pulsante hamburger per il menu mobile */
+  .mobile-toggle {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 1100;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
 
-    /* Pulsante hamburger per il menu mobile */
-    .mobile-toggle {
-      position: fixed;
-      top: 14px;
-      left: 14px;
-      z-index: 1100;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: none;
-      background: var(--primary-color);
-      color: #fff;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,.15);
-    }
+  /* Backdrop scuro per chiudere il menu */
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(1px);
+    z-index: 900;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
 
-    /* Backdrop */
-    .backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.35);
-      backdrop-filter: blur(1px);
-      z-index: 900;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .3s ease;
-    }
+  .backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Griglia contatti più comoda per mobile */
+  .layout { grid-template-columns: 1fr; }
+  .contact-form {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form button {
+    font-size: 16px;    /* evita zoom su iOS */
+  }
+
+  .contact-form input {
+    height: 48px;       /* target touch comodo */
+  }
+
+  .contact-form button {
+    height: 48px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -216,15 +252,17 @@
   <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
 
   <div class="layout">
-    <!-- Colonna sinistra (Menu) -->
-    <aside class="left">
-      <div class="logo">BAR</div>
-      <a href="index.html">Home</a>
-      <a href="Panini.html">Panini</a>
-      <a href="Bibite.html">Bibite</a>
-      <a href="Contatti.html">Contatti</a>
-      <a href="Informazioni.html" class="active">Informazioni</a>
-    </aside>
+
+ <!-- Colonna sinistra (Menu) -->
+<aside class="left">
+  <div class="logo">BAR</div>
+  <a href="index.html" class="active">Home</a>
+  <a href="Panini.html">Panini</a>
+  <a href="Bibite.html">Bibite</a>
+  <a href="Contatti.html" class="active">Contatti</a> <!-- Link alla pagina Contatti -->
+  <a href="Informazioni.html" class="active">Informazioni</a>
+</aside>
+
 
     <!-- Colonna centrale -->
     <main class="center">
@@ -265,23 +303,24 @@
   </footer>
 
   <script>
-    // Funzione per aprire/chiudere il menu mobile
-    function toggleMenu() {
-      const menu = document.querySelector('.left');
-      const backdrop = document.getElementById('backdrop');
-      const isOpen = menu.classList.toggle('is-open');
-      backdrop.classList.toggle('show', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    }
+// Funzione per aprire/chiudere il menu mobile
+function toggleMenu() {
+  const menu = document.querySelector('.left');
+  const backdrop = document.getElementById('backdrop');
+  const isOpen = menu.classList.toggle('is-open');
+  backdrop.classList.toggle('show', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
 
-    // Funzione per chiudere il menu quando si clicca fuori
-    function closeMenu() {
-      const menu = document.querySelector('.left');
-      const backdrop = document.getElementById('backdrop');
-      menu.classList.remove('is-open');
-      backdrop.classList.remove('show');
-      document.body.style.overflow = '';
-    }
+// Funzione per chiudere il menu quando si clicca fuori
+function closeMenu() {
+  const menu = document.querySelector('.left');
+  const backdrop = document.getElementById('backdrop');
+  menu.classList.remove('is-open');
+  backdrop.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
   </script>
 </body>
 </html>
