@@ -251,9 +251,9 @@
   }
 }
 @media (max-width: 900px) {
-  /* Colonna sinistra (Menu) */
+  /* Menu a sinistra (Colonna sinistra), inizialmente nascosto su mobile */
   .left {
-    display: none;
+    display: none; /* Resta nascosto per default */
     position: fixed;
     top: 0;
     left: 0;
@@ -268,7 +268,13 @@
 
   /* Mostra il menu quando è aperto */
   .left.is-open {
+    display: block;  /* Mostra il menu */
+  }
+
+  /* Link nel menu */
+  .left a {
     display: block;
+    margin: 8px 0;
   }
 
   /* Pulsante hamburger per il menu mobile */
@@ -331,14 +337,14 @@
   }
 }
 
+
+
   </style>
 </head>
 <body>
-  <!-- Backdrop -->
-  <div id="backdrop" class="backdrop" onclick="closeMenu()"></div>
+<button class="mobile-toggle" aria-label="Apri menu" onclick="toggleMenu()">☰</button>
+<div id="backdrop" class="backdrop" onclick="closeMenu()"></div>
 
-  <!-- Pulsante hamburger -->
-  <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
 
   <div class="layout">
 
@@ -392,29 +398,25 @@
   </footer>
 
   <script>
-// Funzione per aprire/chiudere il menu mobile
+ // Funzione per aprire/chiudere il menu mobile
 function toggleMenu() {
   const menu = document.querySelector('.left');
   const backdrop = document.getElementById('backdrop');
-  const isOpen = menu.classList.toggle('is-open');
-  backdrop.classList.toggle('show', isOpen);
-
-  // Aggiungi o rimuovi la classe 'no-scroll' al corpo per bloccare lo scroll
-  if (isOpen) {
-    document.body.classList.add('no-scroll');
-  } else {
-    document.body.classList.remove('no-scroll');
-  }
+  const isOpen = menu.classList.toggle('is-open'); // Aggiungi/Elimina la classe 'is-open'
+  backdrop.classList.toggle('show', isOpen); // Mostra/nasconde il backdrop
+  document.body.style.overflow = isOpen ? 'hidden' : ''; // Impedisce lo scroll quando il menu è aperto
 }
 
 // Funzione per chiudere il menu quando si clicca fuori
 function closeMenu() {
   const menu = document.querySelector('.left');
   const backdrop = document.getElementById('backdrop');
-  menu.classList.remove('is-open');
-  backdrop.classList.remove('show');
-  document.body.classList.remove('no-scroll');  // Rimuovi la classe 'no-scroll'
+  menu.classList.remove('is-open');  // Rimuovi la classe per chiudere il menu
+  backdrop.classList.remove('show'); // Rimuovi il backdrop
+  document.body.style.overflow = '';  // Rendi di nuovo possibile lo scroll
 }
+
+
 
 
   </script>
